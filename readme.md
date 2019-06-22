@@ -1,0 +1,46 @@
+# ASP.NET Core WEB API
+#=============================================================================1. EntityFrameworCore
+-  Microsoft.EntityFrameworkCore package
+   -  DbContext
+      -  Manage Database Connection
+      -  Transactions
+         -  Add()/AddRange()
+         -  Remove()
+         -  Cursor Read
+      -  Provides Cursor Management for Read operations
+         -  Map the Model class / Entity Class / POCO with Db Table using DbSet<T>
+      -  SaveChanges() and SaveChangesAsync() method to commit transactions
+   -  DbSet<T>  
+      -  Manage Mapping between Entity Class of name T with Db Table of name T
+      -  AKA Cursor with Read and Write Operations
+   -  Asynchronous Methods
+      -  Uses Connection Resillinency
+-  Use CLI for Database Migrations
+   -  The 'dotnet' command
+      -  Generate Migration
+         -  Auto-generated metacode for Database snapshot
+         -  dotnet ef migrations add <Migration-Name> -c <FUll-Qualify-Path-DbContext-class>
+      -  To generate the database and tables
+         -  dotnet ef database update
+-  Exception Management
+   -  Process Validation 
+      -  try..catch for each action method
+      -  Filters aka Request Action Filters
+         -  Only applied to MVC Core request Processing
+      -  Use Error Middlewares (Recommended)
+-  Rules for Custom Middleware
+   -  Class must be ctor injected using 'RequestDelegate' object
+      -  This object represents current Http Request
+      -  The class must contian 'InvokeAsync()' metod that contains logic for Middleware
+      -  Use IApplicationBuilder interface create an Extension Class for Custom Middleware
+-    Install-Package Swashbuckle.AspNetCore 
+     -    Depednency Services for WEB API Help Page AKA JSON data page
+-    Microsoft.AspNetCore.Identity and Microsoft.EntiryFrameworkCore.Identity
+     -    UserManager
+          -    Manages Users using IdentityUser object
+     -    RoleManager
+          -    Manages Roles using IdentityRole Object
+     -    IdentityDbContext
+          -    Derived from DbContext to manage Db Connections where Identity Information is stored
+     -    services.AddIdentity<TUser, TRole>() to manage Users/Roles for cuurent application
+          -    Register the IdentityDbContext in the DI Container 
